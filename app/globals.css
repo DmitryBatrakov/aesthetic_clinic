@@ -1,26 +1,50 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Базовые */
+  --color-graphite: #1c1a17; /* тёмный фон */
+  --color-bg: #efe7db; /* основной фон */
+  --color-cream: #f5efe6; /* светлые карточки */
+
+  /* Золото */
+  --color-gold: #c9a24b; /* акцент */
+  --color-gold-light: #e3c885; /* блик / hover */
+
+  /* Роза */
+  --color-rose: #c99a8f; /* акцент */
+  --color-rose-light: #e0c4bc; /* подложки */
+
+  /* Нейтральные */
+  --color-taupe: #b8a990; /* бордеры / тени */
+  --color-text: #2b2723; /* основной текст */
+  --color-text-muted: #6e665b; /* подписи */
+
+  --background: var(--color-bg);
+  --foreground: var(--color-text);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-graphite: var(--color-graphite);
+  --color-cream: var(--color-cream);
+  --color-gold: var(--color-gold);
+  --color-gold-light: var(--color-gold-light);
+  --color-rose: var(--color-rose);
+  --color-rose-light: var(--color-rose-light);
+  --color-taupe: var(--color-taupe);
+  --color-text-muted: var(--color-text-muted);
+
+  --font-sans: var(--font-montserrat);
+  --font-serif: var(--font-playfair);
+  --font-script: var(--font-marck);
+  --font-vibes: var(--font-great-vibes);
+  --font-gveret: var(--font-gveret-levin);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-montserrat), Arial, Helvetica, sans-serif;
 }
