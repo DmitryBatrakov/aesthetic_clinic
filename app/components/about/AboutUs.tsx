@@ -6,7 +6,6 @@ import { animate, motion, useInView } from "framer-motion";
 import Image from "next/image";
 import imageOfDoctor from '@/assets/doctor.jpg'
 
-// Счётчик: число «набегает» от 0 до to, когда блок появляется в экране
 function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
     const ref = useRef<HTMLSpanElement>(null);
     const inView = useInView(ref, { once: true, margin: "-80px" });

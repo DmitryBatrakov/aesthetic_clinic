@@ -79,7 +79,7 @@ export default async function LocaleLayout({
       dir={localeDirection[locale as Locale]}
       className={`${playfair.variable} ${montserrat.variable} ${marck.variable} ${greatVibes.variable} ${gveretLevin.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col overflow-x-clip">
         <NextIntlClientProvider>
           <Header />
           {children}

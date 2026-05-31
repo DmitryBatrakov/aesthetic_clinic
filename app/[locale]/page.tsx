@@ -3,6 +3,7 @@ import { Hero } from '../components/hero/Hero';
 import { AboutUs } from '../components/about/AboutUs';
 import { Cosmetology } from '../components/cosmetology/Cosmetology';
 import { Technologies } from '../components/technologies/Technologies';
+import { Services } from '../components/services/Services';
 
 export default async function Home({
     params,
@@ -14,11 +15,12 @@ export default async function Home({
 
     return (
         <main className="flex flex-1 flex-col bg-background text-foreground">
-            <div className="w-full mx-auto">
+            <div className="w-full mx-auto overflow-x-clip">
                 <Hero />
                 <AboutUs />
                 <Technologies />
                 <Cosmetology />
+                <Services />
             </div>
         </main>);
 }
