@@ -4,6 +4,7 @@ import { AboutUs } from '../components/about/AboutUs';
 import { Cosmetology } from '../components/cosmetology/Cosmetology';
 import { Technologies } from '../components/technologies/Technologies';
 import { Services } from '../components/services/Services';
+import { Pricing } from '../components/pricing/Pricing';
 
 export default async function Home({
     params,
@@ -21,6 +22,7 @@ export default async function Home({
                 <Technologies />
                 <Cosmetology />
                 <Services />
+                <Pricing />
             </div>
         </main>);
 }

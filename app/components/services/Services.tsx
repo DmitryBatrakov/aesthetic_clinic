@@ -21,7 +21,7 @@ export const Services = () => {
     return (
         <section
             id="services"
-            className="w-full bg-background px-6 py-20 text-text sm:px-12 md:py-32"
+            className="w-full bg-background px-6 py-20 text-text sm:px-12 md:py-16"
         >
             <div className="mx-auto max-w-6xl">
                 {/* Заголовок + интро */}
