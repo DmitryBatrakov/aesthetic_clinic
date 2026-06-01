@@ -5,9 +5,12 @@ import { LocaleSwitcher } from "../locale-switcher/LocaleSwitcher";
 import { Link } from "@/i18n/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion"
+import { scrollToSection } from "@/app/lib/scroll";
+import { FaWhatsapp, FaInstagram, FaFacebookF } from "react-icons/fa6";
 
 export const Header = () => {
     const t = useTranslations("Nav");
+    const f = useTranslations("Footer");
 
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
 
@@ -26,8 +29,8 @@ export const Header = () => {
     }, [isMobileMenuOpen]);
 
     return (
-        <header className="w-full border-b border-taupe/20">
-            <nav className="mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-4 sm:px-12">
+        <header className="relative w-full border-b border-taupe/20">
+            <nav className="relative z-50 mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-4 sm:px-12 bg-background">
 
                 <span className="font-serif text-2xl tracking-[0.2em] text-gold">
                     <Link href='/'>
@@ -40,6 +43,10 @@ export const Header = () => {
                         <a
                             key={item.key}
                             href={item.href}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                scrollToSection(item.href);
+                            }}
                             className="text-sm tracking-wide text-text-muted transition-colors hover:text-gold"
                         >
                             {t(item.key)}
@@ -84,9 +91,9 @@ export const Header = () => {
                 {isMobileMenuOpen && (
                     <div
                         id="mobile-menu"
-                        className=" min-h-screen flex flex-col items-center justify-start mt-30 w-full">
+                        className="fixed inset-0 z-40 flex flex-col items-center justify-center w-full bg-background">
                         <motion.div
-                            className="flex flex-col gap-10 items-center justify-center h-full"
+                            className="flex flex-col gap-10 items-center justify-center h-full mb-30"
                             variants={{
                                 hidden: {
                                     transition: { staggerChildren: 0.08, staggerDirection: -1 },
@@ -103,7 +110,11 @@ export const Header = () => {
                                 <motion.a
                                     key={item.key}
                                     href={item.href}
-                                    onClick={() => setMobileMenuOpen(false)}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setMobileMenuOpen(false);
+                                        scrollToSection(item.href);
+                                    }}
                                     variants={{
                                         hidden: { opacity: 0, y: 20 },
                                         visible: { opacity: 1, y: 0 },
@@ -114,13 +125,48 @@ export const Header = () => {
                                 </motion.a>
                             ))}
                         </motion.div>
-                        {/* <motion.div
+                        <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1, transition: { duration: 0.3, delay: 0.8 } }}
                             exit={{ opacity: 0, transition: { duration: 0.3 } }}
+                            className="mb-16 flex flex-col items-center gap-5"
                         >
-                           
-                        </motion.div> */}
+                            <a
+                                href={`tel:+${f("whatsappNumber")}`}
+                                className="text-lg tracking-wide text-text transition-colors hover:text-gold"
+                            >
+                                {f("phone")}
+                            </a>
+                            <div className="flex gap-3">
+                                <a
+                                    href={`https://wa.me/${f("whatsappNumber")}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="WhatsApp"
+                                    className="flex h-11 w-11 items-center justify-center rounded-full border border-taupe/30 text-text transition-colors hover:border-gold hover:text-gold"
+                                >
+                                    <FaWhatsapp size={18} />
+                                </a>
+                                <a
+                                    href={f("instagram")}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Instagram"
+                                    className="flex h-11 w-11 items-center justify-center rounded-full border border-taupe/30 text-text transition-colors hover:border-gold hover:text-gold"
+                                >
+                                    <FaInstagram size={18} />
+                                </a>
+                                <a
+                                    href={f("facebook")}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Facebook"
+                                    className="flex h-11 w-11 items-center justify-center rounded-full border border-taupe/30 text-text transition-colors hover:border-gold hover:text-gold"
+                                >
+                                    <FaFacebookF size={16} />
+                                </a>
+                            </div>
+                        </motion.div>
 
                     </div>
                 )}

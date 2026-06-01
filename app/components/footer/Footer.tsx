@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { motion } from "framer-motion";
 import { FaWhatsapp, FaInstagram, FaFacebookF } from "react-icons/fa6";
+import { scrollToSection } from "@/app/lib/scroll";
 
 const navItems = [
     { key: "about", href: "#about-us" },
@@ -133,6 +134,10 @@ export const Footer = () => {
                             <a
                                 key={item.key}
                                 href={item.href}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    scrollToSection(item.href);
+                                }}
                                 className="text-sm tracking-wide text-cream/60 transition-colors hover:text-gold"
                             >
                                 {nav(item.key)}
