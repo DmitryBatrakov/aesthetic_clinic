@@ -63,7 +63,7 @@ export const Services = () => {
                             <div className="absolute inset-0 bg-linear-to-br from-graphite to-graphite/60 transition-transform duration-700 group-hover:scale-105" />
 
                             {/* Номер-вотермарк */}
-                            <span className="absolute inset-e-6 top-5 font-serif text-5xl text-cream/10">
+                            <span className="absolute inset-e-6 top-5 font-serif text-5xl text-white/50">
                                 {String(i + 1).padStart(2, "0")}
                             </span>
 
@@ -72,8 +72,10 @@ export const Services = () => {
 
                             {/* Контент */}
                             <div className="absolute inset-x-0 bottom-0 flex flex-col gap-2 p-6">
-                                <span className="h-px w-10 bg-gold transition-all duration-500 group-hover:w-16" />
-                                <h3 className="font-serif text-2xl text-cream">{item.name}</h3>
+                                <div className="flex w-fit flex-col gap-2">
+                                    <span className="h-px w-10 bg-gold transition-all duration-500 group-hover:w-full" />
+                                    <h3 className="font-serif text-2xl text-cream">{item.name}</h3>
+                                </div>
                                 <p className="text-sm leading-relaxed text-cream/70">
                                     {item.desc}
                                 </p>

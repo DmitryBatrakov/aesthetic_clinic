@@ -19,7 +19,7 @@ export const Technologies = () => {
             id="technologies"
             className="w-full bg-background px-6 py-20 text-text sm:px-12 md:py-16"
         >
-            <div className="mx-auto max-w-6xl">
+            <div className="mx-auto max-w-6xl h-full">
                 {/* Заголовок + интро */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -63,7 +63,7 @@ export const Technologies = () => {
                         return (
                             <div
                                 key={i}
-                                className="grid items-end gap-3 md:grid-cols-2 md:gap-14 mb-5"
+                                className="grid gap-3 md:grid-cols-2 md:items-stretch md:gap-14 mb-5"
                             >
                                 {/* Фото (плейсхолдер).
                                     TODO: заменить на <Image src="/technologies/..." fill className="object-cover" /> */}
@@ -86,15 +86,17 @@ export const Technologies = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true, margin: "-80px" }}
                                     transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-                                    className="flex flex-col gap-5 p-3 justify-between h-full"
+                                    className={`flex h-full flex-col items-center justify-between gap-4 p-3 ${isEven ? "md:items-end md:text-end" : "md:items-start md:text-start"}`}
                                 >
-                                    <div className="flex flex-col gap-3 md:gap-0 items-start justify-center">
-                                        <p className="font-serif text-[7em] text-gold/30 leading-none md:leading-tight">
-                                            {String(i + 1).padStart(2, "0")}
-                                        </p>
+                                    <span className="font-serif text-[8em] leading-none text-gold/30">
+                                        {String(i + 1).padStart(2, "0")}
+                                    </span>
+                                    <div>
                                         <h3 className="text-3xl font-medium">{unit.name}</h3>
+                                        <p className="max-w-md leading-relaxed text-text-muted">
+                                            {unit.desc}
+                                        </p>
                                     </div>
-                                    <p className="leading-relaxed text-text-muted">{unit.desc}</p>
                                 </motion.div>
                             </div>
                         );

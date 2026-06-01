@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { AnimatePresence, motion, type Variants } from "framer-motion";
+import { useBooking } from "../booking/BookingProvider";
 
 type PriceItem = { name: string; price: string; unit?: string; includes?: string[] };
 type Tab = { label: string; items: PriceItem[] };
@@ -20,6 +21,7 @@ export const Pricing = () => {
     const t = useTranslations("Pricing");
     const tabs = t.raw("tabs") as Tab[];
     const [active, setActive] = useState(0);
+    const { open } = useBooking();
 
     return (
         <section
@@ -82,33 +84,37 @@ export const Pricing = () => {
                         className="mt-12 grid gap-x-10 gap-y-4 sm:grid-cols-2"
                     >
                         {tabs[active].items.map((item, i) => (
-                            <motion.li
-                                key={i}
-                                variants={row}
-                                className="border-b border-taupe/20 pb-4"
-                            >
-                                <div className="flex items-baseline justify-between gap-4">
-                                    <span className="font-medium leading-relaxed">{item.name}</span>
-                                    <span className="shrink-0 font-serif text-lg text-gold">
-                                        {item.price}
-                                    </span>
-                                </div>
-                                {item.unit && (
-                                    <p className="mt-1 text-xs text-text-muted">{item.unit}</p>
-                                )}
-                                {item.includes && (
-                                    <ul className="mt-3 flex flex-col gap-1.5">
-                                        {item.includes.map((inc, j) => (
-                                            <li
-                                                key={j}
-                                                className="flex items-center gap-2 text-sm text-text-muted"
-                                            >
-                                                <span className="h-1 w-1 shrink-0 rounded-full bg-taupe" />
-                                                {inc}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
+                            <motion.li key={i} variants={row} className="border-b border-taupe/20">
+                                <button
+                                    type="button"
+                                    onClick={() => open(item.name)}
+                                    className="group w-full pb-4 text-start"
+                                >
+                                    <div className="flex items-baseline justify-between gap-4">
+                                        <span className="font-medium leading-relaxed transition-colors group-hover:text-gold">
+                                            {item.name}
+                                        </span>
+                                        <span className="shrink-0 font-serif text-lg text-gold">
+                                            {item.price}
+                                        </span>
+                                    </div>
+                                    {item.unit && (
+                                        <p className="mt-1 text-xs text-text-muted">{item.unit}</p>
+                                    )}
+                                    {item.includes && (
+                                        <ul className="mt-3 flex flex-col gap-1.5">
+                                            {item.includes.map((inc, j) => (
+                                                <li
+                                                    key={j}
+                                                    className="flex items-center gap-2 text-sm text-text-muted"
+                                                >
+                                                    <span className="h-1 w-1 shrink-0 rounded-full bg-taupe" />
+                                                    {inc}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </button>
                             </motion.li>
                         ))}
                     </motion.ul>
@@ -125,12 +131,13 @@ export const Pricing = () => {
                     <p className="max-w-xl text-sm leading-relaxed text-text-muted">
                         {t("note")}
                     </p>
-                    <a
-                        href="#contact"
+                    <button
+                        type="button"
+                        onClick={() => open()}
                         className="rounded-full bg-linear-to-br from-gold-light via-gold to-[#9e7b33] px-7 py-3 text-sm font-medium tracking-wide text-graphite transition-opacity hover:opacity-90"
                     >
                         {t("cta")}
-                    </a>
+                    </button>
                 </motion.div>
             </div>
         </section>

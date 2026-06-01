@@ -8,6 +8,7 @@ import { routing, localeDirection, type Locale } from "@/i18n/routing";
 import { Header } from "../components/header/Header";
 import { Footer } from "../components/footer/Footer";
 import { Credits } from "../components/footer/Credits";
+import { BookingProvider } from "../components/booking/BookingProvider";
 import "../globals.css";
 
 const playfair = Playfair_Display({
@@ -83,10 +84,12 @@ export default async function LocaleLayout({
     >
       <body className="min-h-full flex flex-col overflow-x-clip">
         <NextIntlClientProvider>
-          <Header />
-          {children}
-          <Footer />
-          <Credits />
+          <BookingProvider>
+            <Header />
+            {children}
+            <Footer />
+            <Credits />
+          </BookingProvider>
         </NextIntlClientProvider>
       </body>
     </html>

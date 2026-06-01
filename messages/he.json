@@ -191,6 +191,14 @@
     "facebook": "https://facebook.com/",
     "rights": "© 2026 ST Aesthetic Medicine. כל הזכויות שמורות."
   },
+  "Booking": {
+    "title": "קביעת תור",
+    "subtitle": "בחרו טיפול — וייפתח צ׳אט וואטסאפ עם הודעה מוכנה.",
+    "consultation": "ייעוץ בלבד",
+    "submit": "לקביעת תור בוואטסאפ",
+    "close": "סגירה",
+    "message": "שלום! אשמח לקבוע תור ל: {service}. אפשר לדעת מתי יש זמן פנוי? 🙏"
+  },
   "Credits": {
     "label": "עיצוב ופיתוח - by",
     "name": "Dmitry",
