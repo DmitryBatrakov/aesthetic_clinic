@@ -56,7 +56,7 @@ export function LocaleSwitcher() {
                 aria-haspopup="listbox"
                 aria-expanded={isOpen}
                 aria-label={t("label")}
-                className="flex items-center gap-2 rounded-full border border-taupe/30 px-4 py-1.5 text-xs font-medium tracking-wide text-text transition-colors hover:text-gold disabled:opacity-60"
+                className="flex items-center gap-2 rounded-full border border-background px-4 py-1.5 text-xs font-medium tracking-wide text-background transition-colors hover:text-gold disabled:opacity-60"
             >
                 {t(activeLocale)} <MdOutlineLanguage size={16} />
             </button>

@@ -29,8 +29,8 @@ export const Header = () => {
     }, [isMobileMenuOpen]);
 
     return (
-        <header className="relative w-full border-b border-taupe/20">
-            <nav className="relative z-60 mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-4 sm:px-12 bg-background">
+        <header className="relative w-full h-full border-b border-taupe/20">
+            <nav className="relative z-60 mx-auto flex w-full  items-center justify-between gap-6 px-6 py-4 sm:px-12">
 
                 <span className="font-serif text-2xl tracking-[0.2em] text-gold">
                     <Link href='/'>
@@ -38,7 +38,7 @@ export const Header = () => {
                     </Link>
                 </span>
 
-                <nav className="hidden items-center gap-8 md:flex">
+                <nav className="hidden items-center gap-8 md:flex max-w-7xl">
                     {navItems.map((item) => (
                         <a
                             key={item.key}

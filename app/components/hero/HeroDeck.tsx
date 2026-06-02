@@ -87,8 +87,14 @@ export const HeroDeck = () => {
 
     return (
         <motion.div
-            className="fixed inset-0 z-40 overflow-hidden"
-            style={{ pointerEvents: revealed && !animating ? "none" : "auto" }}
+            className="fixed inset-0 z-40 overflow-hidden transform-gpu"
+            style={{
+                pointerEvents: revealed && !animating ? "none" : "auto",
+                // Держим занавес на собственном композиторном слое, чтобы подъём
+                // шёл только на GPU и не было рывка при старте анимации.
+                willChange: "transform",
+                backfaceVisibility: "hidden",
+            }}
             animate={{ y: revealed ? "-100%" : "0%" }}
             transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
             onAnimationComplete={() => {
