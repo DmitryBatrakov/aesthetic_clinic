@@ -191,6 +191,9 @@
     "facebook": "https://facebook.com/",
     "rights": "© 2026 ST Aesthetic Medicine. כל הזכויות שמורות."
   },
+  "Splash": {
+    "loading": "טוען"
+  },
   "Booking": {
     "title": "קביעת תור",
     "subtitle": "בחרו טיפול — וייפתח צ׳אט וואטסאפ עם הודעה מוכנה.",

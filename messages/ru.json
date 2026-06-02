@@ -191,6 +191,9 @@
     "facebook": "https://facebook.com/",
     "rights": "© 2026 ST Aesthetic Medicine. Все права защищены."
   },
+  "Splash": {
+    "loading": "Загрузка"
+  },
   "Booking": {
     "title": "Запись на приём",
     "subtitle": "Выберите услугу — откроется чат WhatsApp с готовым сообщением.",

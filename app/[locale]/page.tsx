@@ -1,5 +1,5 @@
 import { setRequestLocale } from "next-intl/server";
-import { Hero } from '../components/hero/Hero';
+import { HeroDeck } from '../components/hero/HeroDeck';
 import { AboutUs } from '../components/about/AboutUs';
 import { Cosmetology } from '../components/cosmetology/Cosmetology';
 import { Technologies } from '../components/technologies/Technologies';
@@ -17,7 +17,8 @@ export default async function Home({
     return (
         <main className="flex flex-1 flex-col bg-background text-foreground">
             <div className="w-full mx-auto overflow-x-clip">
-                <Hero />
+                {/* Занавес: Hero держит экран и по скроллу уезжает вверх */}
+                <HeroDeck />
                 <AboutUs />
                 <Technologies />
                 <Cosmetology />

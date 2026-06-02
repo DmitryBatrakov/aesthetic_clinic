@@ -9,6 +9,7 @@ import { Header } from "../components/header/Header";
 import { Footer } from "../components/footer/Footer";
 import { Credits } from "../components/footer/Credits";
 import { BookingProvider } from "../components/booking/BookingProvider";
+import { Splash } from "../components/splash/Splash";
 import "../globals.css";
 
 const playfair = Playfair_Display({
@@ -84,6 +85,7 @@ export default async function LocaleLayout({
     >
       <body className="min-h-full flex flex-col overflow-x-clip">
         <NextIntlClientProvider>
+          <Splash />
           <BookingProvider>
             <Header />
             {children}
