@@ -46,11 +46,11 @@ export const Header = () => {
     }, [isMobileMenuOpen]);
 
     return (
-        <header className="fixed top-0 z-60 w-full h-full border-b border-taupe/20">
-            <nav className={`relative z-60 mx-auto flex w-full  items-center justify-between gap-6 px-6 py-4 sm:px-12 ease-in-out delay-300 transition-color duration-500 ${isCompact ? 'bg-background' : ''}`}>
+        <header className={`fixed top-0 z-50 w-full transition-all duration-100 delay-300 ease-in-out ${isCompact ? 'border-b border-taupe/20' : ''}`}>
+            <nav className={`relative z-50 mx-auto flex w-full items-center justify-between gap-6 px-6 py-4 sm:px-12 ease-in-out  transition-colors duration-500 ${isCompact ? 'bg-background' : 'delay-400'}`}>
 
                 <span
-                    className={`font-serif tracking-[0.2em] text-gold leading-none transition-[font-size] duration-500 ease-out ${isCompact ? "text-3xl" : "text-7xl"}`}
+                    className={`font-serif tracking-[0.2em] text-gold leading-none transition-[font-size] duration-500 ease-out ${isCompact ? "text-3xl" : "text-7xl delay-400"}`}
                 >
                     <Link href='/'>
                         ST
@@ -66,7 +66,7 @@ export const Header = () => {
                                 e.preventDefault();
                                 navigateToSection(item.href);
                             }}
-                            className="text-sm tracking-wide text-text-muted transition-colors hover:text-gold"
+                            className={`text-sm tracking-wide transition-colors duration-500 delay-300 hover:text-gold hover:duration-0 hover:delay-0 ${isCompact ? 'text-graphite' : 'text-text-muted'}`}
                         >
                             {t(item.key)}
                         </a>
@@ -75,11 +75,11 @@ export const Header = () => {
 
                 <div className="hidden md:flex items-center gap-3">
                     <LocaleSwitcher isCompact={isCompact} />
-    
+
                 </div>
 
                 <div className="flex md:hidden items-center justify-center gap-5">
-                     <LocaleSwitcher />
+                    <LocaleSwitcher />
                     <button
                         type="button"
                         onClick={() => setMobileMenuOpen((open) => !open)}

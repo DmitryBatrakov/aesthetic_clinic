@@ -17,7 +17,6 @@ export default async function Home({
     return (
         <main className="flex flex-1 flex-col bg-background text-foreground">
             <div className="w-full mx-auto overflow-x-clip">
-                {/* Занавес: Hero держит экран и по скроллу уезжает вверх */}
                 <HeroDeck />
                 <AboutUs />
                 <Technologies />

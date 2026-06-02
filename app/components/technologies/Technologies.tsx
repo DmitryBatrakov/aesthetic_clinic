@@ -43,17 +43,18 @@ export const Technologies = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-80px" }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="my-5 flex flex-wrap items-center justify-center gap-3"
+                    className="mx-auto my-12 flex flex-wrap items-center justify-center gap-6"
                 >
                     {principles.map((principle, i) => (
-                        <span
-                            key={i}
-                            className="rounded-full border border-gold/40 bg-gold/5 px-6 py-3 text-sm font-medium tracking-wide text-gold shadow-md shadow-rose/70"
-                        >
-                            {principle}
-                        </span>
+                        <div key={i} className="flex items-center gap-6 py-5">
+                            <span aria-hidden="true" className="size-1.5 rotate-45 bg-gold" />
+                            <span className="font-serif text-xl tracking-wide text-graphite">
+                                {principle}
+                            </span>
+                        </div>
                     ))}
                 </motion.div>
+
 
                 {/* Оборудование — зигзаг */}
                 <div className="mt-16 flex flex-col gap-12 md:gap-20">

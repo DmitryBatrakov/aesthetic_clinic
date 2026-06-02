@@ -102,7 +102,7 @@ export const HeroDeck = () => {
                 backfaceVisibility: "hidden",
             }}
             animate={{ y: revealed ? "-100%" : "0%" }}
-            transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
+            transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: revealed ? 0.2 : 0 }}
             onAnimationComplete={() => {
                 setAnimating(false);
                 // Занавес поднят — снимаем блокировку скролла и скроллим к секции.

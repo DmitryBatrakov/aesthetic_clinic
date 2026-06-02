@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { MdOutlineLanguage } from "react-icons/md";
 
 type Props = {
-    isCompact?:boolean
+    isCompact?: boolean
 }
 
 export function LocaleSwitcher({ isCompact }: Props) {
@@ -49,7 +49,7 @@ export function LocaleSwitcher({ isCompact }: Props) {
     }, [isOpen]);
 
     return (
-        <div ref={containerRef} className="relative">
+        <div ref={containerRef} className="relative group ">
             <button
                 type="button"
                 onClick={() => setOpen((open) => !open)}
@@ -57,7 +57,11 @@ export function LocaleSwitcher({ isCompact }: Props) {
                 aria-haspopup="listbox"
                 aria-expanded={isOpen}
                 aria-label={t("label")}
-                className={`flex items-center gap-2 rounded-full border border-background px-4 py-1.5 text-xs font-medium tracking-wide text-background transition-colors hover:text-gold disabled:opacity-60 duration-500 delay-300 ${isCompact ? 'text-graphite border-graphite' : 'text-background/80 border-background/80'}`}
+                className={`cursor-pointer flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-medium tracking-wide transition duration-500 delay-300 group-hover:delay-0 group-hover:duration-300 ${isCompact
+                    ? 'text-graphite border-graphite group-hover:text-gold group-hover:border-gold'
+                    : 'text-white border-white group-hover:brightness-50'}`}
+
+
             >
                 {t(activeLocale)} <MdOutlineLanguage size={16} />
             </button>
