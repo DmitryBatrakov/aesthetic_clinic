@@ -1,13 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Hero } from "./Hero";
+import { NAVIGATE_EVENT, scrollToSection } from "@/app/lib/scroll";
 
 
 export const HeroDeck = () => {
     const [revealed, setRevealed] = useState(false); // Hero уехал вверх
     const [animating, setAnimating] = useState(false);
+    // Секция, к которой нужно проскроллить после подъёма занавеса.
+    const pendingScroll = useRef<string | null>(null);
 
     useEffect(() => {
         const locked = !revealed || animating;
@@ -20,13 +23,16 @@ export const HeroDeck = () => {
     useEffect(() => {
         let touchStartY = 0;
 
+        // Пока открыто мобильное меню (оверлей в DOM) — занавес не реагирует на жесты.
+        const menuOpen = () => document.getElementById("mobile-menu") !== null;
+
         const lift = () => {
-            if (animating || revealed) return;
+            if (menuOpen() || animating || revealed) return;
             setAnimating(true);
             setRevealed(true);
         };
         const drop = () => {
-            if (animating || !revealed) return;
+            if (menuOpen() || animating || !revealed) return;
             if (window.scrollY > 0) return;
             setAnimating(true);
             setRevealed(false);
@@ -53,15 +59,29 @@ export const HeroDeck = () => {
             else if (dy < -4) drop();
         };
 
+        // Навигация из меню/футера: поднимаем занавес и запоминаем секцию,
+        // к которой нужно проскроллить (скролл выполнится после анимации).
+        const onNavigate = (e: Event) => {
+            const href = (e as CustomEvent<string>).detail;
+            if (revealed && !animating) {
+                scrollToSection(href);
+                return;
+            }
+            pendingScroll.current = href;
+            lift();
+        };
+
         window.addEventListener("wheel", onWheel, { passive: true });
         window.addEventListener("keydown", onKey);
         window.addEventListener("touchstart", onTouchStart, { passive: true });
         window.addEventListener("touchmove", onTouchMove, { passive: true });
+        window.addEventListener(NAVIGATE_EVENT, onNavigate);
         return () => {
             window.removeEventListener("wheel", onWheel);
             window.removeEventListener("keydown", onKey);
             window.removeEventListener("touchstart", onTouchStart);
             window.removeEventListener("touchmove", onTouchMove);
+            window.removeEventListener(NAVIGATE_EVENT, onNavigate);
         };
     }, [revealed, animating]);
 
@@ -71,7 +91,16 @@ export const HeroDeck = () => {
             style={{ pointerEvents: revealed && !animating ? "none" : "auto" }}
             animate={{ y: revealed ? "-100%" : "0%" }}
             transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
-            onAnimationComplete={() => setAnimating(false)}
+            onAnimationComplete={() => {
+                setAnimating(false);
+                // Занавес поднят — снимаем блокировку скролла и скроллим к секции.
+                if (revealed && pendingScroll.current) {
+                    const href = pendingScroll.current;
+                    pendingScroll.current = null;
+                    document.body.style.overflow = "";
+                    scrollToSection(href);
+                }
+            }}
         >
             <Hero />
         </motion.div>

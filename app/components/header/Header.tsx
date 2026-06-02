@@ -5,7 +5,7 @@ import { LocaleSwitcher } from "../locale-switcher/LocaleSwitcher";
 import { Link } from "@/i18n/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion"
-import { scrollToSection } from "@/app/lib/scroll";
+import { navigateToSection } from "@/app/lib/scroll";
 import { FaWhatsapp, FaInstagram, FaFacebookF } from "react-icons/fa6";
 
 export const Header = () => {
@@ -30,7 +30,7 @@ export const Header = () => {
 
     return (
         <header className="relative w-full border-b border-taupe/20">
-            <nav className="relative z-50 mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-4 sm:px-12 bg-background">
+            <nav className="relative z-60 mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-4 sm:px-12 bg-background">
 
                 <span className="font-serif text-2xl tracking-[0.2em] text-gold">
                     <Link href='/'>
@@ -45,7 +45,7 @@ export const Header = () => {
                             href={item.href}
                             onClick={(e) => {
                                 e.preventDefault();
-                                scrollToSection(item.href);
+                                navigateToSection(item.href);
                             }}
                             className="text-sm tracking-wide text-text-muted transition-colors hover:text-gold"
                         >
@@ -91,7 +91,7 @@ export const Header = () => {
                 {isMobileMenuOpen && (
                     <div
                         id="mobile-menu"
-                        className="fixed inset-0 z-40 flex flex-col items-center justify-center w-full bg-background">
+                        className="fixed inset-0 z-50 flex flex-col items-center justify-center w-full bg-background">
                         <motion.div
                             className="flex flex-col gap-10 items-center justify-center h-full mb-30"
                             variants={{
@@ -113,7 +113,7 @@ export const Header = () => {
                                     onClick={(e) => {
                                         e.preventDefault();
                                         setMobileMenuOpen(false);
-                                        scrollToSection(item.href);
+                                        navigateToSection(item.href);
                                     }}
                                     variants={{
                                         hidden: { opacity: 0, y: 20 },

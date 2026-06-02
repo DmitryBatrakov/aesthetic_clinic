@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { motion, type Variants } from "framer-motion";
-import { scrollToSection } from "@/app/lib/scroll";
+import { navigateToSection } from "@/app/lib/scroll";
 
 type Service = { name: string; desc: string };
 
@@ -100,7 +100,7 @@ export const Services = () => {
                         href="#pricing"
                         onClick={(e) => {
                             e.preventDefault();
-                            scrollToSection("#pricing");
+                            navigateToSection("#pricing");
                         }}
                         className="rounded-full bg-linear-to-br from-gold-light via-gold to-[#9e7b33] px-7 py-3 text-sm font-medium tracking-wide text-graphite transition-opacity hover:opacity-90"
                     >
