@@ -5,7 +5,7 @@ import { LocaleSwitcher } from "../locale-switcher/LocaleSwitcher";
 import { Link } from "@/i18n/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion"
-import { navigateToSection } from "@/app/lib/scroll";
+import { navigateToSection, REVEAL_EVENT } from "@/app/lib/scroll";
 import { FaWhatsapp, FaInstagram, FaFacebookF } from "react-icons/fa6";
 
 export const Header = () => {
@@ -13,6 +13,11 @@ export const Header = () => {
     const f = useTranslations("Footer");
 
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const [isScrolled, setScrolled] = useState(false)
+    const [isHeroLifted, setHeroLifted] = useState(false)
+
+    // Компактный режим: либо занавес Hero пошёл вверх, либо есть скролл страницы.
+    const isCompact = isScrolled || isHeroLifted
 
     const navItems = [
         { key: "about", href: "#about-us" },
@@ -22,6 +27,18 @@ export const Header = () => {
     ] as const;
 
     useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 8);
+        const onReveal = (e: Event) => setHeroLifted((e as CustomEvent<boolean>).detail);
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener(REVEAL_EVENT, onReveal);
+        return () => {
+            window.removeEventListener("scroll", onScroll);
+            window.removeEventListener(REVEAL_EVENT, onReveal);
+        };
+    }, []);
+
+    useEffect(() => {
         document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
         return () => {
             document.body.style.overflow = "";
@@ -29,10 +46,12 @@ export const Header = () => {
     }, [isMobileMenuOpen]);
 
     return (
-        <header className="relative w-full h-full border-b border-taupe/20">
-            <nav className="relative z-60 mx-auto flex w-full  items-center justify-between gap-6 px-6 py-4 sm:px-12">
+        <header className="fixed top-0 z-60 w-full h-full border-b border-taupe/20">
+            <nav className={`relative z-60 mx-auto flex w-full  items-center justify-between gap-6 px-6 py-4 sm:px-12 ease-in-out delay-300 transition-color duration-500 ${isCompact ? 'bg-background' : ''}`}>
 
-                <span className="font-serif text-2xl tracking-[0.2em] text-gold">
+                <span
+                    className={`font-serif tracking-[0.2em] text-gold leading-none transition-[font-size] duration-500 ease-out ${isCompact ? "text-3xl" : "text-7xl"}`}
+                >
                     <Link href='/'>
                         ST
                     </Link>
@@ -55,7 +74,7 @@ export const Header = () => {
                 </nav>
 
                 <div className="hidden md:flex items-center gap-3">
-                    <LocaleSwitcher />
+                    <LocaleSwitcher isCompact={isCompact} />
     
                 </div>
 

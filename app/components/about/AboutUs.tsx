@@ -44,7 +44,7 @@ export const AboutUs = () => {
     return (
         <section
             id="about-us"
-            className="w-full bg-cream px-6 py-20 text-text sm:px-12 md:py-32"
+            className="w-full bg-background px-6 py-20 text-text sm:px-12 md:py-32"
         >
             <div className="mx-auto max-w-7xl">
                 <div className="grid items-start gap-10 md:grid-cols-2 md:gap-16">

@@ -17,7 +17,7 @@ export const Technologies = () => {
     return (
         <section
             id="technologies"
-            className="w-full bg-background px-6 py-20 text-text sm:px-12 md:py-16"
+            className="w-full bg-cream px-6 py-20 text-text sm:px-12 md:py-16"
         >
             <div className="mx-auto max-w-6xl h-full">
                 {/* Заголовок + интро */}

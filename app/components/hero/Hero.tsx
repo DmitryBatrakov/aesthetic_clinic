@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { FiMinus } from "react-icons/fi";
-import heroPhoto from '@/assets/hero.jpg'
+import heroPhoto from '@/assets/hero2.jpeg'
 import Image from "next/image";
 
 export const Hero = () => {
@@ -16,9 +16,7 @@ export const Hero = () => {
                 <Image
                     src={heroPhoto}
                     alt="hero photo"
-                    fill
-                    sizes="100vw"
-                    className="object-cover"
+                    className="object-cover w-full h-full"
                     priority
                 />
             </div>
@@ -38,11 +36,11 @@ export const Hero = () => {
                         <p className={` text-rose  ${locale === 'he' ? 'font-gveret text-xl' : 'font-vibes text-2xl md:text-3xl'} `}>{t("taglineScript")}</p>
                     </div>
                 </div>
-                <div className="flex gap-10 items-start justify-center">
-                    <div className="w-40 h-20 border-2 border-graphite px-1 rounded-lg" />
-                    <div className="w-40 h-20 border-2 border-graphite px-1 rounded-lg"/>
-                    <div className="w-40 h-20 border-2 border-graphite px-1 rounded-lg"/>
-                    <div className="w-40 h-20 border-2 border-graphite px-1 rounded-lg"/>
+                <div className="flex gap-15 items-start justify-start w-full mt-10">
+                    <div className="w-50 h-25 border border-graphite px-1 rounded-lg shadow-xl bg-background flex flex-col items-center justify-center" >1</div>
+                    <div className="w-50 h-25 border border-graphite px-1 rounded-lg shadow-xl bg-background flex flex-col items-center justify-center" >2</div>
+                    <div className="w-50 h-25 border border-graphite px-1 rounded-lg shadow-xl bg-background flex flex-col items-center justify-center" >3</div>
+                    <div className="w-50 h-25 border border-graphite px-1 rounded-lg shadow-xl bg-background flex flex-col items-center justify-center" >4</div>
                 </div>
             </div>
         </section>

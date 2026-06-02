@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Hero } from "./Hero";
-import { NAVIGATE_EVENT, scrollToSection } from "@/app/lib/scroll";
+import { NAVIGATE_EVENT, REVEAL_EVENT, scrollToSection } from "@/app/lib/scroll";
 
 
 export const HeroDeck = () => {
@@ -19,6 +19,12 @@ export const HeroDeck = () => {
             document.body.style.overflow = "";
         };
     }, [revealed, animating]);
+
+    // Сообщаем шапке о начале/окончании движения занавеса, чтобы она
+    // переходила в компактный режим синхронно с подъёмом Hero.
+    useEffect(() => {
+        window.dispatchEvent(new CustomEvent<boolean>(REVEAL_EVENT, { detail: revealed }));
+    }, [revealed]);
 
     useEffect(() => {
         let touchStartY = 0;

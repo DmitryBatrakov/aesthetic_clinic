@@ -6,9 +6,12 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { AnimatePresence, motion } from "framer-motion";
 import { MdOutlineLanguage } from "react-icons/md";
-import { RxChevronDown } from "react-icons/rx";
 
-export function LocaleSwitcher() {
+type Props = {
+    isCompact?:boolean
+}
+
+export function LocaleSwitcher({ isCompact }: Props) {
     const t = useTranslations("LocaleSwitcher");
     const activeLocale = useLocale();
     const router = useRouter();
@@ -25,7 +28,6 @@ export function LocaleSwitcher() {
         });
     }
 
-    // Закрытие по клику вне и по Esc
     useEffect(() => {
         if (!isOpen) return;
 
@@ -48,7 +50,6 @@ export function LocaleSwitcher() {
 
     return (
         <div ref={containerRef} className="relative">
-            {/* Триггер */}
             <button
                 type="button"
                 onClick={() => setOpen((open) => !open)}
@@ -56,12 +57,11 @@ export function LocaleSwitcher() {
                 aria-haspopup="listbox"
                 aria-expanded={isOpen}
                 aria-label={t("label")}
-                className="flex items-center gap-2 rounded-full border border-background px-4 py-1.5 text-xs font-medium tracking-wide text-background transition-colors hover:text-gold disabled:opacity-60"
+                className={`flex items-center gap-2 rounded-full border border-background px-4 py-1.5 text-xs font-medium tracking-wide text-background transition-colors hover:text-gold disabled:opacity-60 duration-500 delay-300 ${isCompact ? 'text-graphite border-graphite' : 'text-background/80 border-background/80'}`}
             >
                 {t(activeLocale)} <MdOutlineLanguage size={16} />
             </button>
 
-            {/* Список */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.ul
