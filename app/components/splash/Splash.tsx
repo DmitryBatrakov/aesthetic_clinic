@@ -29,7 +29,7 @@ export const Splash = () => {
         <AnimatePresence>
             {isVisible && (
                 <motion.div
-                    className="fixed inset-0 z-60 flex flex-col items-center justify-center gap-4 bg-graphite p-10"
+                    className="fixed inset-0 z-70 flex flex-col items-center justify-center gap-4 bg-graphite p-10"
                     initial={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.6, ease: "easeInOut" }}
