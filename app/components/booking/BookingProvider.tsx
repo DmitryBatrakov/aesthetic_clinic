@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, type ReactNode } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { AnimatePresence, motion } from "framer-motion";
 import { RxCross1 } from "react-icons/rx";
 import { FiChevronDown } from "react-icons/fi";
@@ -35,6 +35,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
     const tabs = pricing.raw("tabs") as Tab[];
     const whatsappNumber = footer("whatsappNumber");
     const consultation = t("consultation");
+    const locale = useLocale();
 
     const [isOpen, setIsOpen] = useState(false);
     const [selected, setSelected] = useState<string>(consultation);
@@ -60,12 +61,9 @@ export function BookingProvider({ children }: { children: ReactNode }) {
     };
 
     return (
-        <BookingContext.Provider value={{ open }}>
+        <BookingContext.Provider value={{ open }} >
             {children}
-
-            {/* Управляется стейтом — окно открывается программно через open().
-                vaul сам блокирует скролл, закрывает по Esc / клику по оверлею / свайпу. */}
-            <Drawer open={isOpen} onOpenChange={setIsOpen} direction="right">
+            <Drawer open={isOpen} onOpenChange={setIsOpen} direction={"right"} >
                 <DrawerContent className="bg-background text-text rounded-0">
                     <DrawerClose asChild>
                         <button
@@ -77,7 +75,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
                         </button>
                     </DrawerClose>
 
-                    <DrawerHeader className="text-start">
+                    <DrawerHeader className="text-start md:text-start">
                         <DrawerTitle className="font-serif text-2xl text-text">
                             {t("title")}
                         </DrawerTitle>

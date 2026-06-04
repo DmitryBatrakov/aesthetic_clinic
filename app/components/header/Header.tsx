@@ -77,8 +77,8 @@ export const Header = () => {
                             </a>
                         ))}
                     </nav>
-                </div>
 
+                </div>
                 <div className="hidden lg:flex items-center gap-3">
                     <LocaleSwitcher isCompact={isCompact} />
 
