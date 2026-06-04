@@ -20,6 +20,13 @@ export function LocaleSwitcher({ isCompact }: Props) {
     const [isOpen, setOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
 
+    // На мобилке фон всегда кремовый (Hero, оверлей меню, компактная шапка) —
+    // свитчер графитовый. Белый нужен только на десктопе в дефолте, где он
+    // лежит поверх тёмного фото Hero (фото есть лишь с md:).
+    const switcherColor = isCompact
+        ? "border-graphite text-graphite"
+        : "border-graphite text-graphite md:border-white md:text-white"
+
     function onSelect(nextLocale: Locale) {
         setOpen(false);
         if (nextLocale === activeLocale) return;
@@ -57,9 +64,7 @@ export function LocaleSwitcher({ isCompact }: Props) {
                 aria-haspopup="listbox"
                 aria-expanded={isOpen}
                 aria-label={t("label")}
-                className={`cursor-pointer flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-medium tracking-wide transition duration-500 delay-300 group-hover:delay-0 group-hover:duration-300 ${isCompact
-                    ? 'text-graphite border-graphite group-hover:text-gold group-hover:border-gold'
-                    : 'text-white border-white group-hover:brightness-50'}`}
+                className={`cursor-pointer flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-medium tracking-wide transition duration-500 delay-300 group-hover:delay-0 group-hover:duration-300 ${switcherColor}`}
 
 
             >

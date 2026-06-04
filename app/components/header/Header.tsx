@@ -16,8 +16,13 @@ export const Header = () => {
     const [isScrolled, setScrolled] = useState(false)
     const [isHeroLifted, setHeroLifted] = useState(false)
 
-    // Компактный режим: либо занавес Hero пошёл вверх, либо есть скролл страницы.
     const isCompact = isScrolled || isHeroLifted
+
+    const logoSize = isMobileMenuOpen
+        ? "text-3xl"
+        : isCompact
+            ? "text-3xl"
+            : "text-5xl delay-400 md:text-7xl"
 
     const navItems = [
         { key: "about", href: "#about-us" },
@@ -50,7 +55,7 @@ export const Header = () => {
             <nav className={`relative z-50 mx-auto flex w-full items-center justify-between gap-6 px-6 py-4 sm:px-12 ease-in-out  transition-colors duration-500 ${isCompact ? 'bg-background' : 'delay-400'}`}>
 
                 <span
-                    className={`font-serif tracking-[0.2em] text-gold leading-none transition-[font-size] duration-500 ease-out ${isCompact ? "text-3xl" : "text-7xl delay-400"}`}
+                    className={`font-serif tracking-[0.2em] text-gold leading-none transition-[font-size] duration-500 ease-out ${logoSize}`}
                 >
                     <Link href='/'>
                         ST
@@ -79,7 +84,7 @@ export const Header = () => {
                 </div>
 
                 <div className="flex md:hidden items-center justify-center gap-5">
-                    <LocaleSwitcher />
+                    <LocaleSwitcher isCompact={isCompact} />
                     <button
                         type="button"
                         onClick={() => setMobileMenuOpen((open) => !open)}
@@ -110,7 +115,7 @@ export const Header = () => {
                 {isMobileMenuOpen && (
                     <div
                         id="mobile-menu"
-                        className="fixed inset-0 z-50 flex flex-col items-center justify-center w-full bg-background">
+                        className="fixed inset-0 z-40 flex flex-col items-center justify-center w-full bg-background">
                         <motion.div
                             className="flex flex-col gap-10 items-center justify-center h-full mb-30"
                             variants={{

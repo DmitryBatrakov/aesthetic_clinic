@@ -1,11 +1,16 @@
 "use client";
 
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { IconType } from "react-icons";
 import { FiActivity, FiZap, FiSearch } from "react-icons/fi";
+import firstImage from '@/assets/tech/1.jpg'
+import secondImage from '@/assets/tech/2.jpg'
+import thirdImage from '@/assets/tech/3.jpg'
 
 const equipmentIcons: IconType[] = [FiActivity, FiZap, FiSearch];
+const equipmentImages = [firstImage, secondImage, thirdImage];
 
 type Equipment = { name: string; desc: string };
 
@@ -66,19 +71,19 @@ export const Technologies = () => {
                                 key={i}
                                 className="grid gap-3 md:grid-cols-2 md:items-stretch md:gap-14 mb-5"
                             >
-                                {/* Фото (плейсхолдер).
-                                    TODO: заменить на <Image src="/technologies/..." fill className="object-cover" /> */}
                                 <motion.div
                                     initial={{ opacity: 0, x: isEven ? -40 : 40 }}
                                     whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ once: true, margin: "-80px" }}
                                     transition={{ duration: 0.6, ease: "easeOut" }}
-                                    className={`relative aspect-4/3 w-full overflow-hidden rounded-4xl border border-taupe/30 bg-graphite ${isEven ? "" : "md:order-last"
-                                        }`}
+                                    className={`overflow-hidden rounded-4xl border border-taupe/30 bg-graphite ${isEven ? "" : "md:order-last"}`}
                                 >
-                                    <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-graphite to-graphite/60">
-                                        <Icon className="text-gold/70" size={64} />
-                                    </div>
+                                    <Image
+                                        src={equipmentImages[i]}
+                                        alt={unit.name}
+                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                        className="max-h-130 w-full object-cover"
+                                    />
                                 </motion.div>
 
                                 {/* Описание */}

@@ -7,9 +7,8 @@ import { NAVIGATE_EVENT, REVEAL_EVENT, scrollToSection } from "@/app/lib/scroll"
 
 
 export const HeroDeck = () => {
-    const [revealed, setRevealed] = useState(false); // Hero уехал вверх
+    const [revealed, setRevealed] = useState(false); 
     const [animating, setAnimating] = useState(false);
-    // Секция, к которой нужно проскроллить после подъёма занавеса.
     const pendingScroll = useRef<string | null>(null);
 
     useEffect(() => {
@@ -20,8 +19,6 @@ export const HeroDeck = () => {
         };
     }, [revealed, animating]);
 
-    // Сообщаем шапке о начале/окончании движения занавеса, чтобы она
-    // переходила в компактный режим синхронно с подъёмом Hero.
     useEffect(() => {
         window.dispatchEvent(new CustomEvent<boolean>(REVEAL_EVENT, { detail: revealed }));
     }, [revealed]);
@@ -29,7 +26,6 @@ export const HeroDeck = () => {
     useEffect(() => {
         let touchStartY = 0;
 
-        // Пока открыто мобильное меню (оверлей в DOM) — занавес не реагирует на жесты.
         const menuOpen = () => document.getElementById("mobile-menu") !== null;
 
         const lift = () => {
@@ -65,16 +61,16 @@ export const HeroDeck = () => {
             else if (dy < -4) drop();
         };
 
-        // Навигация из меню/футера: поднимаем занавес и запоминаем секцию,
-        // к которой нужно проскроллить (скролл выполнится после анимации).
         const onNavigate = (e: Event) => {
             const href = (e as CustomEvent<string>).detail;
             if (revealed && !animating) {
                 scrollToSection(href);
                 return;
             }
+            if (animating) return;
             pendingScroll.current = href;
-            lift();
+            setAnimating(true);
+            setRevealed(true);
         };
 
         window.addEventListener("wheel", onWheel, { passive: true });
@@ -96,8 +92,6 @@ export const HeroDeck = () => {
             className="fixed inset-0 z-40 overflow-hidden transform-gpu"
             style={{
                 pointerEvents: revealed && !animating ? "none" : "auto",
-                // Держим занавес на собственном композиторном слое, чтобы подъём
-                // шёл только на GPU и не было рывка при старте анимации.
                 willChange: "transform",
                 backfaceVisibility: "hidden",
             }}
@@ -105,7 +99,6 @@ export const HeroDeck = () => {
             transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: revealed ? 0.2 : 0 }}
             onAnimationComplete={() => {
                 setAnimating(false);
-                // Занавес поднят — снимаем блокировку скролла и скроллим к секции.
                 if (revealed && pendingScroll.current) {
                     const href = pendingScroll.current;
                     pendingScroll.current = null;

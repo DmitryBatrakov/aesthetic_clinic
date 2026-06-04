@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { useBooking } from "../booking/BookingProvider";
@@ -9,8 +9,13 @@ type PriceItem = { name: string; price: string; unit?: string; includes?: string
 type Tab = { label: string; items: PriceItem[] };
 
 const list: Variants = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.04 } },
+    hidden: (dir: number) => ({ opacity: 0, x: dir * 28 }),
+    visible: {
+        opacity: 1,
+        x: 0,
+        transition: { duration: 0.3, ease: "easeOut", when: "beforeChildren", staggerChildren: 0.04 },
+    },
+    exit: (dir: number) => ({ opacity: 0, x: dir * -28, transition: { duration: 0.2, ease: "easeIn" } }),
 };
 const row: Variants = {
     hidden: { opacity: 0, y: 12 },
@@ -21,7 +26,28 @@ export const Pricing = () => {
     const t = useTranslations("Pricing");
     const tabs = t.raw("tabs") as Tab[];
     const [active, setActive] = useState(0);
+    const [direction, setDirection] = useState(0);
+    const [height, setHeight] = useState<number | "auto">("auto");
+    const activeRef = useRef<HTMLUListElement | null>(null);
     const { open } = useBooking();
+
+    const selectTab = (i: number) => {
+        setDirection(i > active ? 1 : i < active ? -1 : 0);
+        setActive(i);
+    };
+
+    const measureRef = useCallback((node: HTMLUListElement | null) => {
+        activeRef.current = node;
+        if (node) setHeight(node.offsetHeight);
+    }, []);
+
+    useEffect(() => {
+        const onResize = () => {
+            if (activeRef.current) setHeight(activeRef.current.offsetHeight);
+        };
+        window.addEventListener("resize", onResize);
+        return () => window.removeEventListener("resize", onResize);
+    }, []);
 
     return (
         <section
@@ -60,13 +86,20 @@ export const Pricing = () => {
                                     key={i}
                                     role="tab"
                                     aria-selected={isActive}
-                                    onClick={() => setActive(i)}
-                                    className={`rounded-full border px-5 py-2 text-sm font-medium tracking-wide transition-colors sm:border-0 ${isActive
-                                        ? "border-gold bg-gold text-graphite"
+                                    onClick={() => selectTab(i)}
+                                    className={`relative rounded-full border px-5 py-2 text-sm font-medium tracking-wide transition-colors sm:border-0 ${isActive
+                                        ? "border-gold text-graphite"
                                         : "border-taupe/30 text-text-muted hover:text-gold"
                                         }`}
                                 >
-                                    {tab.label}
+                                    {isActive && (
+                                        <motion.span
+                                            layoutId="pricing-tab-pill"
+                                            transition={{ type: "spring", stiffness: 400, damping: 32 }}
+                                            className="absolute inset-0 rounded-full bg-gold"
+                                        />
+                                    )}
+                                    <span className="relative">{tab.label}</span>
                                 </button>
                             );
                         })}
@@ -74,15 +107,22 @@ export const Pricing = () => {
                 </div>
 
                 {/* Список процедур активного таба */}
-                <AnimatePresence mode="wait">
-                    <motion.ul
-                        key={active}
-                        variants={list}
-                        initial="hidden"
-                        animate="visible"
-                        exit={{ opacity: 0, transition: { duration: 0.15 } }}
-                        className="mt-12 grid gap-x-10 gap-y-4 sm:grid-cols-2"
-                    >
+                <motion.div
+                    animate={{ height }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    className="relative mt-12 overflow-hidden"
+                >
+                    <AnimatePresence custom={direction} initial={false}>
+                        <motion.ul
+                            ref={measureRef}
+                            key={active}
+                            custom={direction}
+                            variants={list}
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
+                            className="absolute inset-s-0 inset-e-0 top-0 grid gap-x-10 gap-y-4 sm:grid-cols-2"
+                        >
                         {tabs[active].items.map((item, i) => (
                             <motion.li key={i} variants={row} className="border-b border-taupe/20">
                                 <button
@@ -117,8 +157,9 @@ export const Pricing = () => {
                                 </button>
                             </motion.li>
                         ))}
-                    </motion.ul>
-                </AnimatePresence>
+                        </motion.ul>
+                    </AnimatePresence>
+                </motion.div>
 
                 {/* Примечание + CTA */}
                 <motion.div
