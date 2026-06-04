@@ -2,16 +2,13 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { FiMinus } from "react-icons/fi";
-import heroPhoto from '@/assets/hero2.jpeg'
+import heroPhoto from '@/assets/hero6.jpeg'
 import Image from "next/image";
 
 export const Hero = () => {
     const t = useTranslations("Hero");
     const locale = useLocale()
 
-    // Фото прижато к "концу" строки (inset-e) и флипается по dir.
-    // clip-path физический — отражаем полигон по горизонтали для RTL (he),
-    // чтобы диагональный срез всегда смотрел в сторону контента.
     const photoClip =
         locale === "he"
             ? "[clip-path:polygon(70%_0,0_0,0_100%,100%_100%)]"
@@ -20,10 +17,11 @@ export const Hero = () => {
     return (
         <section className="relative flex flex-col h-full w-full items-center overflow-hidden bg-background">
             <div className={`pointer-events-none absolute inset-y-0 inset-e-0 hidden md:w-100 lg:w-160 ${photoClip} md:block`}>
+                <div className="bg-black/30 absolute top-0 w-full h-full" />
                 <Image
                     src={heroPhoto}
                     alt="hero photo"
-                    className="object-cover w-full h-full"
+                    className="object-cover object-right w-full h-full"
                     priority
                 />
             </div>

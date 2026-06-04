@@ -56,11 +56,12 @@ export const AboutUs = () => {
                         className="relative mx-auto aspect-4/5 w-full max-w-md overflow-hidden rounded-4xl border border-gold/40 bg-graphite"
                     >
                         <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-graphite to-graphite/60">
-                            <Image 
-                                src={imageOfDoctor} 
-                                alt={t("doctorName")} 
-                                sizes="(min-width:768px) 50vw, 100vw" 
-                                className="object-cover" 
+                            <Image
+                                src={imageOfDoctor}
+                                alt={t("doctorName")}
+                                sizes="(min-width:768px) 50vw, 100vw"
+                                className="object-cover"
+                                priority
                             />
                         </div>
                     </motion.div>
