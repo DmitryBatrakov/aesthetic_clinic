@@ -29,7 +29,7 @@ export const Cosmetology = () => {
             id="cosmetology"
             className="w-full bg-graphite/80 px-6 py-20 text-cream sm:px-12 md:py-32"
         >
-            <div className="mx-auto max-w-6xl">
+            <div className="mx-auto max-w-6xl px-6">
                 {/* Заголовок + интро */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}

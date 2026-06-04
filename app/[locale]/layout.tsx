@@ -28,7 +28,6 @@ const marck = Marck_Script({
   subsets: ["latin", "cyrillic"],
 });
 
-// Локальные шрифты из app/fonts/.
 const greatVibes = localFont({
   src: "../fonts/GreatVibes-Regular.ttf",
   variable: "--font-great-vibes",
@@ -69,12 +68,10 @@ export default async function LocaleLayout({
 }>) {
   const { locale } = await params;
 
-  // Валидация локали из URL
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
 
-  // Включаем статический рендеринг для этой локали
   setRequestLocale(locale);
 
   return (
@@ -85,11 +82,11 @@ export default async function LocaleLayout({
     >
       <body className="min-h-full flex flex-col overflow-x-clip">
         <NextIntlClientProvider>
-          <Splash />
           <BookingProvider>
             <Header />
             {children}
             <Footer />
+            <Splash />
             <Credits />
           </BookingProvider>
         </NextIntlClientProvider>

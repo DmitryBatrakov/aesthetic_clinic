@@ -3,13 +3,10 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { IconType } from "react-icons";
-import { FiActivity, FiZap, FiSearch } from "react-icons/fi";
 import firstImage from '@/assets/tech/1.jpg'
 import secondImage from '@/assets/tech/2.jpg'
 import thirdImage from '@/assets/tech/3.jpg'
 
-const equipmentIcons: IconType[] = [FiActivity, FiZap, FiSearch];
 const equipmentImages = [firstImage, secondImage, thirdImage];
 
 type Equipment = { name: string; desc: string };
@@ -24,7 +21,7 @@ export const Technologies = () => {
             id="technologies"
             className="w-full bg-cream px-6 py-20 text-text sm:px-12 md:py-16"
         >
-            <div className="mx-auto max-w-6xl h-full">
+            <div className="mx-auto max-w-6xl h-full px-6">
                 {/* Заголовок + интро */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}

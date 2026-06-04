@@ -24,7 +24,7 @@ export const Services = () => {
             id="services"
             className="w-full bg-background px-6 py-20 text-text sm:px-12 md:py-16"
         >
-            <div className="mx-auto max-w-6xl">
+            <div className="mx-auto max-w-6xl px-6">
                 {/* Заголовок + интро */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}

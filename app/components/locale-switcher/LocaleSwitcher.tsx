@@ -20,9 +20,6 @@ export function LocaleSwitcher({ isCompact }: Props) {
     const [isOpen, setOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
 
-    // На мобилке фон всегда кремовый (Hero, оверлей меню, компактная шапка) —
-    // свитчер графитовый. Белый нужен только на десктопе в дефолте, где он
-    // лежит поверх тёмного фото Hero (фото есть лишь с md:).
     const switcherColor = isCompact
         ? "border-graphite text-graphite"
         : "border-graphite text-graphite md:border-white md:text-white"
@@ -64,11 +61,12 @@ export function LocaleSwitcher({ isCompact }: Props) {
                 aria-haspopup="listbox"
                 aria-expanded={isOpen}
                 aria-label={t("label")}
-                className={`cursor-pointer flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-medium tracking-wide transition duration-500 delay-300 group-hover:delay-0 group-hover:duration-300 ${switcherColor}`}
+                className={`cursor-pointer flex items-center gap-2 text-lg font-medium tracking-wide transition duration-500 delay-300 group-hover:delay-0 group-hover:duration-300 group-hover:underline ${switcherColor}`}
 
 
             >
-                {t(activeLocale)} <MdOutlineLanguage size={16} />
+                {t(activeLocale)}
+                 {/* <MdOutlineLanguage size={22} /> */}
             </button>
 
             <AnimatePresence>
@@ -80,7 +78,7 @@ export function LocaleSwitcher({ isCompact }: Props) {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -6 }}
                         transition={{ duration: 0.15 }}
-                        className="absolute inset-e-0 top-full z-50 mt-2 overflow-hidden rounded-2xl border border-taupe/30 bg-background/95 p-1 shadow-lg backdrop-blur"
+                        className="absolute left-1/2 -translate-x-1/2 top-full z-50 mt-2 min-w-12 overflow-hidden rounded-2xl border border-taupe/30 bg-background/95 p-1 shadow-lg backdrop-blur"
                     >
                         {routing.locales.map((loc) => {
                             const isActive = loc === activeLocale;

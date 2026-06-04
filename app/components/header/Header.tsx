@@ -11,6 +11,7 @@ import { FaWhatsapp, FaInstagram, FaFacebookF } from "react-icons/fa6";
 export const Header = () => {
     const t = useTranslations("Nav");
     const f = useTranslations("Footer");
+    const whatsappNumber = f("whatsappNumber");
 
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [isScrolled, setScrolled] = useState(false)
@@ -51,8 +52,8 @@ export const Header = () => {
     }, [isMobileMenuOpen]);
 
     return (
-        <header className={`fixed top-0 z-50 w-full transition-all duration-100 delay-300 ease-in-out ${isCompact ? 'border-b border-taupe/20' : ''}`}>
-            <nav className={`relative z-50 mx-auto flex w-full items-center justify-between gap-6 px-6 py-4 sm:px-12 ease-in-out transition-colors duration-500 ${isCompact ? 'bg-background' : 'delay-400'}`}>
+        <header className={`fixed top-0 z-50 w-full transition-all duration-100 delay-300 ease-in-out  ${isCompact ? 'border-b border-taupe/20 bg-background' : ''}`}>
+            <nav className={`relative max-w-6xl z-50 mx-auto flex w-full items-center justify-between gap-6 px-6 py-4 sm:px-12 ease-in-out transition-colors duration-500 ${isCompact ? '' : 'delay-400'}`}>
                 <div className="w-full flex items-center justify-start gap-30">
                     <span
                         className={`font-serif tracking-[0.2em] text-gold leading-none transition-[font-size] duration-500 ease-out ${logoSize}`}
@@ -79,8 +80,16 @@ export const Header = () => {
                     </nav>
 
                 </div>
-                <div className="hidden lg:flex items-center gap-3">
+                <div className={`hidden lg:flex items-center justify-center gap-3 transition-colors duration-500 delay-300 ${isCompact ? 'text-graphite' : 'text-white'}`}>
                     <LocaleSwitcher isCompact={isCompact} />
+
+                    <a
+                        href={`https://wa.me/${whatsappNumber}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <FaWhatsapp size={25} />
+                    </a>
 
                 </div>
 
