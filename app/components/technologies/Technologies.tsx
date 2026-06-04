@@ -21,7 +21,7 @@ export const Technologies = () => {
             id="technologies"
             className="w-full bg-cream px-6 py-20 text-text sm:px-12 md:py-16"
         >
-            <div className="mx-auto max-w-6xl h-full px-6">
+            <div className="mx-auto max-w-6xl h-full md:px-6">
                 {/* Заголовок + интро */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -88,7 +88,7 @@ export const Technologies = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true, margin: "-80px" }}
                                     transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-                                    className={`flex h-full flex-col items-center justify-between gap-4 p-3 ${isEven ? "md:items-end md:text-end" : "md:items-start md:text-start"}`}
+                                    className={`flex h-full flex-col items-start justify-between gap-4 p-3 ${isEven ? "md:items-end md:text-end" : "md:items-start md:text-start"}`}
                                 >
                                     <span className="font-serif text-[8em] leading-none text-gold/30">
                                         {String(i + 1).padStart(2, "0")}

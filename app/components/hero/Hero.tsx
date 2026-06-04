@@ -36,7 +36,7 @@ export const Hero = () => {
                 </div>
 
                 <div className="relative z-10 w-2/3 md:w-full h-full flex flex-col items-start justify-center gap-1">
-                    <div className="w-full md:w-fit flex flex-col gap-8 items-center md:items-start justify-center px-2">
+                    <div className="w-full md:w-fit flex flex-col gap-5 md:gap-8 items-center md:items-start justify-center px-2">
                         <div className="w-fit flex flex-col items-center">
                             <span className="text-4xl md:text-5xl uppercase tracking-wider font-semibold">aesthetic</span>
                             <div className="flex items-start justify-center gap-2">
@@ -46,7 +46,7 @@ export const Hero = () => {
                             </div>
                         </div>
                         <div className="w-full max-w-sm md:max-w-lg space-y-1 flex flex-col items-center md:items-start gap-2">
-                            <p className="font-medium uppercase tracking-wide">{t("taglineTitle")}</p>
+                            <p className="font-medium uppercase tracking-wide text-center md:text-start">{t("taglineTitle")}</p>
                             <p className={` text-rose text-center md:text-start  ${locale === 'he' ? 'font-gveret text-xl' : 'font-vibes text-2xl md:text-3xl'} `}>{t("taglineScript")}</p>
                         </div>
                         <div className="w-full grid grid-cols-3 place-items-center">

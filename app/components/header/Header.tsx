@@ -125,9 +125,9 @@ export const Header = () => {
                 {isMobileMenuOpen && (
                     <div
                         id="mobile-menu"
-                        className="fixed inset-0 z-40 flex flex-col items-center justify-center w-full bg-background">
+                        className="fixed inset-0 z-40 flex flex-col items-center justify-center w-full bg-background p-8 md:p-0">
                         <motion.div
-                            className="flex flex-col gap-10 items-center justify-center h-full mb-30"
+                            className="flex flex-col gap-10 items-center justify-center h-full"
                             variants={{
                                 hidden: {
                                     transition: { staggerChildren: 0.08, staggerDirection: -1 },
@@ -163,7 +163,7 @@ export const Header = () => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1, transition: { duration: 0.3, delay: 0.8 } }}
                             exit={{ opacity: 0, transition: { duration: 0.3 } }}
-                            className="mb-16 flex flex-col items-center gap-5"
+                            className=" flex flex-col items-center gap-5"
                         >
                             <a
                                 href={`tel:+${f("whatsappNumber")}`}
