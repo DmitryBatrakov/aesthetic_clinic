@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { AnimatePresence, motion } from "framer-motion";
 
-const HOLD_MS = 1000;
+const HOLD_MS = 500;
 
 export const Splash = () => {
     const t = useTranslations("Splash");
@@ -34,7 +34,7 @@ export const Splash = () => {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.6, ease: "easeInOut" }}
                 >
-                    <div className="pointer-events-none absolute inset-5 md:inset-10 border-2 border-gold/80 animate-pulse rounded-lg" />
+                    <div className="pointer-events-none absolute inset-7 md:inset-15 border-2 border-gold/80 animate-pulse rounded-lg" />
                     <motion.span
                         className="font-serif text-7xl tracking-tighter text-gold"
                         initial={{ x: -120, opacity: 0 }}

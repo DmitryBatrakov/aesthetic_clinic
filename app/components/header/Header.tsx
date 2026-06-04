@@ -22,7 +22,7 @@ export const Header = () => {
         ? "text-3xl"
         : isCompact
             ? "text-3xl"
-            : "text-5xl delay-400 md:text-7xl"
+            : "text-5xl delay-200 md:text-7xl"
 
     const navItems = [
         { key: "about", href: "#about-us" },
@@ -52,38 +52,39 @@ export const Header = () => {
 
     return (
         <header className={`fixed top-0 z-50 w-full transition-all duration-100 delay-300 ease-in-out ${isCompact ? 'border-b border-taupe/20' : ''}`}>
-            <nav className={`relative z-50 mx-auto flex w-full items-center justify-between gap-6 px-6 py-4 sm:px-12 ease-in-out  transition-colors duration-500 ${isCompact ? 'bg-background' : 'delay-400'}`}>
+            <nav className={`relative z-50 mx-auto flex w-full items-center justify-between gap-6 px-6 py-4 sm:px-12 ease-in-out transition-colors duration-500 ${isCompact ? 'bg-background' : 'delay-400'}`}>
+                <div className="w-full flex items-center justify-start gap-30">
+                    <span
+                        className={`font-serif tracking-[0.2em] text-gold leading-none transition-[font-size] duration-500 ease-out ${logoSize}`}
+                    >
+                        <Link href='/'>
+                            ST
+                        </Link>
+                    </span>
 
-                <span
-                    className={`font-serif tracking-[0.2em] text-gold leading-none transition-[font-size] duration-500 ease-out ${logoSize}`}
-                >
-                    <Link href='/'>
-                        ST
-                    </Link>
-                </span>
+                    <nav className={`hidden  items-center justify-center gap-8 px-4 lg:flex max-w-7xl transition-all duration-700 ease-in-out ${isCompact ? 'flex-1' : ''}`}>
+                        {navItems.map((item) => (
+                            <a
+                                key={item.key}
+                                href={item.href}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    navigateToSection(item.href);
+                                }}
+                                className={`whitespace-nowrap shrink-0 text-sm tracking-wide transition-colors duration-500 delay-300 hover:text-gold hover:duration-0 hover:delay-0 ${isCompact ? 'text-graphite' : 'text-text-muted'}`}
+                            >
+                                {t(item.key)}
+                            </a>
+                        ))}
+                    </nav>
+                </div>
 
-                <nav className="hidden items-center gap-8 md:flex max-w-7xl">
-                    {navItems.map((item) => (
-                        <a
-                            key={item.key}
-                            href={item.href}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                navigateToSection(item.href);
-                            }}
-                            className={`text-sm tracking-wide transition-colors duration-500 delay-300 hover:text-gold hover:duration-0 hover:delay-0 ${isCompact ? 'text-graphite' : 'text-text-muted'}`}
-                        >
-                            {t(item.key)}
-                        </a>
-                    ))}
-                </nav>
-
-                <div className="hidden md:flex items-center gap-3">
+                <div className="hidden lg:flex items-center gap-3">
                     <LocaleSwitcher isCompact={isCompact} />
 
                 </div>
 
-                <div className="flex md:hidden items-center justify-center gap-5">
+                <div className="flex lg:hidden items-center justify-center gap-5">
                     <LocaleSwitcher isCompact={isCompact} />
                     <button
                         type="button"

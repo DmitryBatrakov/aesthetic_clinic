@@ -52,7 +52,7 @@ export const Technologies = () => {
                 >
                     {principles.map((principle, i) => (
                         <div key={i} className="flex items-center gap-6 py-5">
-                            <span aria-hidden="true" className="size-1.5 rotate-45 bg-gold" />
+                            {i !== 0 && <span aria-hidden="true" className="size-1.5 rotate-45 bg-gold" />}
                             <span className="font-serif text-xl tracking-wide text-graphite">
                                 {principle}
                             </span>
@@ -64,7 +64,6 @@ export const Technologies = () => {
                 {/* Оборудование — зигзаг */}
                 <div className="mt-16 flex flex-col gap-12 md:gap-20">
                     {equipment.map((unit, i) => {
-                        const Icon = equipmentIcons[i] ?? FiActivity;
                         const isEven = i % 2 === 0;
                         return (
                             <div
