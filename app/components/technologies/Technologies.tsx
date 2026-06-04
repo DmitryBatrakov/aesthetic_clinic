@@ -48,11 +48,11 @@ export const Technologies = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-80px" }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="mx-auto my-12 flex flex-wrap items-center justify-center gap-6"
+                    className="mx-auto my-12 flex flex-col md:flex-row flex-wrap items-start md:items-center justify-center gap-2 md:gap-6"
                 >
                     {principles.map((principle, i) => (
-                        <div key={i} className="flex items-center gap-6 py-5">
-                            {i !== 0 && <span aria-hidden="true" className="size-1.5 rotate-45 bg-gold" />}
+                        <div key={i} className="flex items-center justify-center gap-6 ">
+                            <span aria-hidden="true" className="size-1.5 rotate-45 bg-gold" />
                             <span className="font-serif text-xl tracking-wide text-graphite">
                                 {principle}
                             </span>
